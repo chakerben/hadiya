@@ -17,33 +17,32 @@ const dbUrl = process.env.DB_URL_PROD
 mongoose
   .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log("connected to the database")
-    app.listen(3000)
-    console.log("listening on port 3000")
+    console.log("Connected to the database")
+    app.listen(process.env.PORT || 3000, () => {
+      console.log("Listening on port " + (process.env.PORT || 3000))
+    })
   })
   .catch((err) => {
     console.log(err)
   })
+
 app.use(
   cors({
-    origin: process.env.URL_CLIENT,
+    origin: process.env.URL_CLIENT, // Assurez-vous que cette variable d'environnement est correctement configurée
     methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS"],
     credentials: true,
   })
 )
-app.use(express.urlencoded({ extended: true }))
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  )
-  next()
-})
+
 // Routes
 app.use("/api/forms", formRoutes)
 app.use("/api/admin", adminRoutes)
-app.use(express.static("dist"))
-app.use(express.static("users_files"))
+
+// Serveur les fichiers statiques depuis le dossier dist
+app.use(express.static(path.join(__dirname, "dist")))
+app.use(express.static(path.join(__dirname, "users_files")))
+
+// Si une requête ne correspond à aucune route, renvoyer index.html
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"))
 })
