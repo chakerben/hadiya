@@ -1,7 +1,6 @@
 .history
 node_modules
 users_files
-.env
 package-lock.json
 launch.json
 .DS_Store
