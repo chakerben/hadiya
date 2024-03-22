@@ -69,7 +69,7 @@ exports.uploadPhoto = async (req, res) => {
     fs.writeFileSync(photoPath, base64Data, "base64")
 
     // Retourner l'URL de l'image enregistrée
-    const imageUrl = `http://localhost:3000/api/admin/picture/${orderId}`
+    const imageUrl = `${process.env.URL_CLIENT}/api/admin/picture/${orderId}`
     const order = await Order.findByIdAndUpdate(orderId, {
       urlPicture: photoName,
     })
