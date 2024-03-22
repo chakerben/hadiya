@@ -3,5 +3,5 @@ node_modules
 package-lock.json
 launch.json
 .DS_Store
-.env
 users_files
+.env
