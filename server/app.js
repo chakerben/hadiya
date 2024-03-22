@@ -42,8 +42,8 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api/forms", formRoutes)
 app.use("/api/admin", adminRoutes)
-app.use(express.static("dist/dist"))
+app.use(express.static("dist"))
 app.use(express.static("users_files"))
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist/dist", "index.html"))
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"))
 })
