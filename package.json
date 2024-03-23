@@ -21,6 +21,7 @@
     "start": "node server/app.js",
     "dev": "nodemon server/app.js",
     "client-install": "npm install --prefix front",
-    "client-start": "npm start --prefix front"
+    "client-start": "npm start --prefix front",
+    "test": ""
   }
 }
