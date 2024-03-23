@@ -11,6 +11,9 @@ const cors = require("cors")
 dotenv.config()
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({ limit: "50mb" })) // Augmenter la limite de taille du payload à 50 MB
+
 const dbUrl = process.env.DB_URL_PROD
 
 // MongoDB connection
