@@ -133,7 +133,10 @@ exports.uploadPhoto = async (req, res) => {
     await Order.findByIdAndUpdate(orderId, { urlPicture: fileName })
     res.status(200).json({ imageUrl })
   } catch (error) {
-    console.error("Erreur lors de l'enregistrement de la photo :", error)
+    console.error(
+      "Erreur lors de l'enregistrement de la photo :",
+      error?.message
+    )
     res.status(500).json({
       message: "Une erreur est survenue lors de l'enregistrement de la photo.",
     })
