@@ -138,7 +138,7 @@ exports.uploadPhoto = async (req, res) => {
       error?.message
     )
     res.status(500).json({
-      message: "Une erreur est survenue lors de l'enregistrement de la photo.",
+      message: `Une erreur est survenue lors de l'enregistrement de la photo. ${error?.message}`,
     })
   }
 }
