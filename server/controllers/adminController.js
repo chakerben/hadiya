@@ -69,55 +69,6 @@ const upload = multer({ storage: storage })
 
 exports.uploadPhoto = async (req, res) => {
   try {
-    /* // Récupérer les données de l'image depuis la requête
-    const imageData = req.body.imageData
-    const orderId = req.body.orderId
-
-    // Extraire le type d'image (jpeg, png, etc.)
-    const matches = imageData.match(/^data:image\/([A-Za-z]+);base64,(.+)$/)
-    const imageType = matches[1]
-    const base64Data = matches[2]
-
-    // Enregistrer l'image sur le serveur avec un nom unique
-    const photoName = `photo_${orderId}_${Date.now()}.${imageType}`
-    const photoPath = path.join(__dirname, "..", "users_files", photoName)
-
-    fs.writeFileSync(photoPath, base64Data, "base64")
-
-    // Retourner l'URL de l'image enregistrée
-    const imageUrl = `${process.env.URL_CLIENT}/api/admin/picture/${orderId}`
-    const order = await Order.findByIdAndUpdate(orderId, {
-      urlPicture: photoName,
-    })
-    res.status(200).json({ imageUrl })*/
-    // Utilisez multer pour gérer le téléchargement du fichier
-    /* upload.single("image")(req, res, async (err) => {
-      if (err instanceof multer.MulterError) {
-        // Gérer les erreurs multer
-        return res.status(500).json({
-          message: "Une erreur est survenue lors du téléchargement du fichier.",
-        })
-      } else if (err) {
-        // Gérer les autres erreurs
-        return res.status(500).json({
-          message: "Une erreur est survenue lors du téléchargement du fichier.",
-        })
-      }
-      console.log("req.body", req.body)
-      console.log("req.file", req.file)
-      // Le fichier a été téléchargé avec succès
-      const orderId = req.body.orderId
-      const fileName = req.file.filename // Nom du fichier téléchargé
-
-      // Enregistrez l'URL de l'image dans votre base de données ou effectuez d'autres opérations nécessaires
-
-      // Retournez l'URL de l'image téléchargée en tant que réponse
-      const imageUrl = `${process.env.URL_CLIENT}/api/admin/picture/${orderId}`
-      const order = await Order.findByIdAndUpdate(orderId, {
-        urlPicture: fileName,
-      })
-      res.status(200).json({ imageUrl })
-    })*/
     if (!req.file) {
       return res.status(400).json({ message: "Aucun fichier téléchargé" })
     }
@@ -128,7 +79,7 @@ exports.uploadPhoto = async (req, res) => {
     const filePath = path.join(__dirname, "..", "users_files", fileName)
 
     // Récupérer l'URL de l'image enregistrée
-    const imageUrl = `${process.env.URL_CLIENT}/api/admin/picture/${orderId}`
+    const imageUrl = `${process.env.URL_CLIENT}/api/admin/picture/${orderId}/${fileName}`
     // Mettre à jour l'ordre avec l'URL de l'image
     await Order.findByIdAndUpdate(orderId, { urlPicture: fileName })
     res.status(200).json({ imageUrl })
