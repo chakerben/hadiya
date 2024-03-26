@@ -6,6 +6,7 @@ const orderSchema = new Schema({
   phoneNumber: { type: String, required: true },
   urlPicture: { type: String },
   creationDate: { type: Date, default: Date.now }, // Création de la date par défaut
+  sendDate: { type: Date },
 })
 
 module.exports = mongoose.model("Order", orderSchema)

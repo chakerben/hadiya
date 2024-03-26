@@ -26,6 +26,7 @@ router.post(
 // Routes
 router.post("/login", adminController.login)
 router.get("/requests", adminController.getOrder)
+router.post("/update-send-date/:idOrder/", adminController.updateSendDate)
 router.get("/picture/:pictureId/:fileName", adminController.getUserPictures)
 
 module.exports = router

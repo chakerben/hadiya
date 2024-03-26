@@ -65,6 +65,19 @@ exports.getOrder = async (req, res) => {
     })
   }
 }
+exports.updateSendDate = async (req, res) => {
+  try {
+    const idOrder = req.params.idOrder
+    await Order.findByIdAndUpdate(idOrder, { sendDate: new Date() })
+    res.status(200).json({ success: true })
+  } catch (error) {
+    // En cas d'erreur, renvoyer une réponse avec un code d'erreur
+    res.status(500).json({
+      message: "Une erreur s'est produite lors de la mise a jour.",
+    })
+  }
+}
+
 const upload = multer({ storage: storage })
 
 exports.uploadPhoto = async (req, res) => {
