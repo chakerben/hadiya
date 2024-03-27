@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
 exports.getOrder = async (req, res) => {
   try {
     // Récupérer toutes les demandes depuis la source de données
-    const orders = await Order.find().sort({ creationDate: -1 })
+    const orders = await Order.find().sort({ creationDate: 1 })
     // Renvoyer les demandes en tant que réponse
     res.json(orders)
   } catch (error) {
